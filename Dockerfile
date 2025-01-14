@@ -1,8 +1,12 @@
+# Build stage
 FROM maven:3.8.5-openjdk-17 AS build
+WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
+# Runtime stage
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build target/BrunchBliss-Canteen-0.0.1-SNAPSHOT.jar Video_Streaming_App.jar
+WORKDIR /app
+COPY --from=build /app/target/External-Api-0.0.1-SNAPSHOT.jar External-Api.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "External-Api"]
+ENTRYPOINT ["java", "-jar", "External-Api.jar"]
