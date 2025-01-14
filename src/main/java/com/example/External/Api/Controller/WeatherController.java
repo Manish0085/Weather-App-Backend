@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("weather")
-@CrossOrigin(origins = "https://weather-app-red-seven-68.vercel.app")
+@CrossOrigin(origins = "*")
 public class WeatherController {
 
     @Autowired
